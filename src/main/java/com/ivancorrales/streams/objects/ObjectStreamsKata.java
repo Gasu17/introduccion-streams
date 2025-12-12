@@ -1,6 +1,7 @@
 package com.ivancorrales.streams.objects;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * KATA: Streams con OBJETOS (playlist tipo Spotify)
@@ -61,7 +62,13 @@ public class ObjectStreamsKata {
      * (Piensa: seleccionar por artista → transformar a títulos → lista)
      */
     public List<String> titulosDeArtista(String artista) {
-        throw new UnsupportedOperationException("TODO");
+    	
+        return playlist.stream()
+        		.filter(s -> s.getArtist().equals(artista))
+        		.map (s -> s.getTitle())
+        		.collect(Collectors.toList());
+      
+        		
     }
 
     /**
@@ -73,7 +80,15 @@ public class ObjectStreamsKata {
      * (Piensa: seleccionar → distinct → map(título) → sorted → lista)
      */
     public List<String> titulosRecomendadosUnicosOrdenados() {
-        throw new UnsupportedOperationException("TODO");
+    	
+    	return playlist.stream()
+    			.distinct()
+    			.filter(s -> s.getRating() >= 4.5 )
+    			.map(s -> s.getTitle())
+    			.sorted()
+    			.collect(Collectors.toList());
+        
+        
     }
 
     /**
@@ -89,7 +104,11 @@ public class ObjectStreamsKata {
      * (Piensa: distinct → sorted(criterios) → limit(2) → map(título) → lista)
      */
     public List<String> top2PorRatingLuegoDuracion() {
-        throw new UnsupportedOperationException("TODO");
+    	throw new UnsupportedOperationException("TODO");
+       // return playlist.stream()
+     //   		.sorted (s -> s.getRating().getSeconds())
+        		
+        
     }
 
     /**
